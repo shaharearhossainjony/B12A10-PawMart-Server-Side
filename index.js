@@ -91,6 +91,24 @@ app.post('/pet-supplies', async (req, res) => {
 
 
 
+app.post('/orders', async (req, res) => {
+  const order = req.body;
+
+  try {
+    const result = await ordersCollection.insertOne(order);
+
+    res.send({
+      success: true,
+      message: "Your Order placed successfully!",
+      data: result
+    });
+  } catch (error) {
+    res.status(500).send({ success: false, error: error.message });
+  }
+});
+
+
+
 
 
     console.log("Connected to MongoDB successfully!");
