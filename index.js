@@ -124,6 +124,18 @@ app.get('/orders', async (req, res) => {
 });
 
 
+app.put('/update/:id', async (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  const query = { _id: new ObjectId(id) };
+  const updateListing = { $set: data };
+
+  const result = await petSuppliesCollection.updateOne(query, updateListing);
+  res.send(result);
+});
+
+
+
 
 
     console.log("Connected to MongoDB successfully!");
