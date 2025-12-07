@@ -60,6 +60,26 @@ app.get('/pet-supplies', async (req, res) => {
 
 
 
+app.get('/pet-supplies/:id', async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const result = await petSuppliesCollection.findOne({ _id: new ObjectId(id) });
+
+    if (!result) {
+      return res.status(404).send({ message: "No listing found" });
+    }
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
+
+
+
+
+
     console.log("Connected to MongoDB successfully!");
   } finally {
   }
