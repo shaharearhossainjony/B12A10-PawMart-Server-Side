@@ -77,6 +77,19 @@ app.get('/pet-supplies/:id', async (req, res) => {
 
 
 
+app.post('/pet-supplies', async (req, res) => {
+  const petSupply = req.body;
+
+  try {
+    const result = await petSuppliesCollection.insertOne(petSupply);
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
+
+
 
 
 
