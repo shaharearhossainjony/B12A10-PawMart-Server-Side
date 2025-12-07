@@ -21,7 +21,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
+    // await client.connect();
 
     const database = client.db("pawMart");
     const petSuppliesCollection = database.collection("petSupplies");
@@ -173,9 +173,11 @@ async function run() {
         });
       }
     });
-
+     
+    // await client.db("admin").command({ ping: 1 });
     console.log("Connected to MongoDB successfully!");
   } finally {
+    // await client.close();
   }
 }
 
