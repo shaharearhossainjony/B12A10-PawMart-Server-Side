@@ -108,6 +108,21 @@ app.post('/orders', async (req, res) => {
 });
 
 
+app.get('/orders', async (req, res) => {
+  const email = req.query.email;
+
+  if (!email) {
+    return res.status(400).send({ message: "Email query is required" });
+  }
+
+  try {
+    const result = await ordersCollection.find({ buyerEmail: email }).toArray();
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
 
 
 
