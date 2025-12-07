@@ -21,9 +21,44 @@ async function run() {
     const petSuppliesCollection = database.collection("petSupplies");
     const ordersCollection = database.collection("orders");
 
+    app.get("/pet-supplies", async (req, res) => {
+      const email = req.query.email;
+
+      let filter = {};
+      if (email) {
+        filter = { email: email };
+      }
+
+      try {
+        const result = await petSuppliesCollection.find(filter).toArray();
+        res.send(result);
+      } catch (error) {
+        res.status(500).send({ error: error.message });
+      }
+    });
 
 
-    
+
+  
+app.get('/pet-supplies', async (req, res) => {
+  const email = req.query.email;
+
+  let filter = {};
+  if (email) {
+    filter = { email: email };
+  }
+
+  try {
+    const result = await petSuppliesCollection.find(filter).toArray();
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
+
+
+
 
     console.log("Connected to MongoDB successfully!");
   } finally {
